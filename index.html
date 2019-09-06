@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="shared/js/$$.js"></script>
+        <script src="shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() !== null) {
+                $$.toRoute('user/home');
+            } else {
+                $$.toRoute('guest/home');
+            }
+        </script>
+    </head>
+    <body>
+        <div class="page">
+            <h1>
+                <span class="fa fa-spinner fa-spin"></span>
+                Loading UuidRegistry.Com ...
+            </h1>
+        </div>
+
+        <!-- START: StatCounter -->
+        <script src="shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>
