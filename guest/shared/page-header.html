@@ -1,0 +1,86 @@
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UUID Registry</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="page-home">
+                    <a href="#home" onclick="$$.to('guest/home.html');">
+                        Home
+                    </a>
+                </li>
+                <li class="page-faq">
+                    <a href="#prices" onclick="$$.to('guest/prices.html');">
+                        Prices
+                    </a>
+                </li>
+                <li class="page-faq">
+                    <a href="#search" onclick="$$.to('guest/search.html');">
+                        Search
+                    </a>
+                </li>
+                <li class="page-faq">
+                    <a href="#snapshots" onclick="$$.to('guest/snapshots.html');">
+                        Preview
+                    </a>
+                </li>
+                <li class="page-faq">
+                    <a href="#faq" onclick="$$.to('guest/faq.html');">
+                        FAQ
+                    </a>
+                </li>
+                <li class="page-faq">
+                    <a href="#developers" onclick="$$.to('guest/developers.html');">
+                        Developers
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#help" onclick="return false;" class="dropdown-toggle" data-toggle="dropdown">
+                        Help
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#contact" onclick="return $$.to('guest/contact.html');">
+                                Contact
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#credits" onclick="return $$.to('guest/credits.html');">
+                                Credits
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li class="page-login">
+                    <script>
+                        function loginWithLibreId() {
+                            var url = "https://libreid-sinevia.rhcloud.com/?a=service_login&id=20150228084622561179";
+                            url += "&return=" + encodeURIComponent($$.config().rootUrl + 'guest/login.html');
+                            window.location.href = url;
+                            return false;
+                        }
+                    </script>
+                    <a href="#" onclick="return loginWithLibreId();">
+                        Login with LibreID
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
