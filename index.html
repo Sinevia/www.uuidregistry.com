@@ -1,19 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>UUID Registry</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="shared/js/$$.js"></script>
-        <script src="shared/js/$$.initialize.js"></script>
-        <script>
-            if ($$.user() !== null) {
-                $$.toRoute('user/home');
-            } else {
-                $$.toRoute('guest/home');
-            }
-        </script>
-    </head>
     <body>
         <div class="page">
             <h1>
@@ -22,8 +8,29 @@
             </h1>
         </div>
 
+        <!-- START: Scripts -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script>
+            APP_ID = "97341539c91a43fc9a89026d222baadb";
+            WEBSITE_URL = "https://www.uuidregistry.com";
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/lesichkovm/web@2.0.0/initialize.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/lesichkovm/cell@1.5.0/cell.js"></script> -->
+        <!-- END: Scripts -->
+
         <!-- START: StatCounter -->
-        <script src="shared/js/statcounter.js"></script>
+        <!-- <script src="shared/js/statcounter.js"></script> -->
         <!-- END: StatCounter -->
+
+        <script>
+            $(function(){
+                if ($$.getUser() !== null) {
+                    $$.to('user/home');
+                } else {
+                    $$.to('guest/home');
+                }
+            });
+        </script>
     </body>
 </html>
