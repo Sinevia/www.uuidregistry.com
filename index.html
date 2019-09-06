@@ -1,6 +1,82 @@
----
-layout: guest
-title: Home : UUID Registry
----
-
-INDEX
+<html>
+    <head>
+        <style>
+            .Menu li{
+                padding: 10px;
+                border: 1px solid grey;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+            .Menu li:hover{
+                background:yellow;
+            }
+        </style>
+    </head>
+    <body>
+        Loading...
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script>
+          APP_URL = "https://www.uuidregistry.com";
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/lesichkovm/web@2.0.0/initialize.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/lesichkovm/cell@1.5.0/cell.js"></script>
+        <script src="header.js"></script>
+        <script src="footer.js"></script>
+        <script src="contents.js"></script>
+        <script>
+function page(name){
+    //$("#Contents div.Page").hide();
+    //$.('#Page'+name).show();
+    $('#Contents').load("page-"+name+".html");
+    Swal.close();
+}
+var Layout = {
+    $type:"table",
+    style:"width:100%;height:100%;",
+    $components: [
+        {
+            $type:"tr",
+            $components: [
+                {
+                    $type:"td",
+                    style:"height:1px;text-align:left;",
+                    $components: [Header]
+                }
+            ]
+        },
+        {
+            $type:"tr",
+            $components: [
+                {
+                    $type:"td",
+                    style:"vertical-align:top;text-align:left;",
+                    $components: [Contents]
+                }
+            ]
+        },
+        {
+            $type:"tr",
+            $components: [
+                {
+                    $type:"td",
+                    style:"height:1px;text-align:left;",
+                    $components: [Footer]
+                }
+            ]
+        }
+    ]
+};
+app = {
+	$cell: true,
+	$type: "body",
+    style: "margin:0px;padding:0px;height:100%;",
+	$components: [Layout],
+    $init:function(){
+        $('#Contents').html('Home page');
+        page('home');
+    }
+}
+        </script>
+    </body>
+</html>
