@@ -21,9 +21,10 @@
         </script>
         <script src="https://cdn.jsdelivr.net/gh/lesichkovm/web@2.0.0/initialize.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/lesichkovm/cell@1.5.0/cell.js"></script>
-        <script src="header.js"></script>
-        <script src="footer.js"></script>
-        <script src="contents.js"></script>
+        <script src="js/ui/Header.js"></script>
+        <script src="js/ui/Footer.js"></script>
+        <script src="js/ui/Contents.js"></script>
+        <script src="js/ui/Layout.js"></script>
         <script>
 function page(name){
     //$("#Contents div.Page").hide();
@@ -31,42 +32,7 @@ function page(name){
     $('#Contents').load("page-"+name+".html");
     Swal.close();
 }
-var Layout = {
-    $type:"table",
-    style:"width:100%;height:100%;",
-    $components: [
-        {
-            $type:"tr",
-            $components: [
-                {
-                    $type:"td",
-                    style:"height:1px;text-align:left;",
-                    $components: [Header]
-                }
-            ]
-        },
-        {
-            $type:"tr",
-            $components: [
-                {
-                    $type:"td",
-                    style:"vertical-align:top;text-align:left;",
-                    $components: [Contents]
-                }
-            ]
-        },
-        {
-            $type:"tr",
-            $components: [
-                {
-                    $type:"td",
-                    style:"height:1px;text-align:left;",
-                    $components: [Footer]
-                }
-            ]
-        }
-    ]
-};
+
 app = {
 	$cell: true,
 	$type: "body",
