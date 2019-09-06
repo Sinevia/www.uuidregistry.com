@@ -1,0 +1,29 @@
+body{
+    padding-top: 80px;
+    background-image: url('bg-shimmering-light-pattern.jpg');
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}
+
+.footer hr{
+    margin: 20px 0px 0px 0px;
+}
+
+.footer .container{
+    margin: 12px auto 12px auto;
+}
