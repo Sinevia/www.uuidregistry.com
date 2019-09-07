@@ -2,15 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Prices - UUID Registry</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="../shared/js/$$.js"></script>
-        <script src="../shared/js/$$.initialize.js"></script>
-        <script>
-            if ($$.user() !== null) {
-                $$.toRoute('user/home');
-            }
-        </script>
+        <title>Prices : UUID Registry</title>
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../shared/main.css" rel="stylesheet" />
+    </he
     </head>
     <body>
         <!-- START: Header -->
@@ -85,8 +81,8 @@
         <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
         <!-- END: Header -->
 
-        <!-- START: StatCounter -->
-        <script src="../shared/js/statcounter.js"></script>
-        <!-- END: StatCounter -->
-    </body>
+        {% include_relative shared/footer-scripts.html %}
+
+        
+     </body>
 </html>
