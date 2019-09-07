@@ -1,72 +1,72 @@
-<div class="navbar navbar-fixed-top navbar-default" role="navigation">
-
-    <div class="container">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">UUID Registry</a>
-        </div>
-
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="page-home">
-                    <a href="#home" onclick="$$.to('guest/home.html');">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<div class="container">
+		<a class="navbar-brand" href="/"><b>UUID Registry</b></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/"><b>Home </b><span class="sr-only">(current)</span></a>
+				</li>
+				
+				<li class="nav-item ">
+					<a class="nav-link" href="/documentation"><b>Documentation</b></a>
+				</li>
+                <li class="page-home nav-item">
+                    <a class="nav-link" href="#home" onclick="$$.to('guest/home.html');">
                         Home
                     </a>
                 </li>
-                <li class="page-faq">
-                    <a href="#prices" onclick="$$.to('guest/prices.html');">
+                <li class="page-faq nav-item ">
+                    <a class="nav-link" href="#prices" onclick="$$.to('guest/prices.html');">
                         Prices
                     </a>
                 </li>
-                <li class="page-faq">
-                    <a href="#search" onclick="$$.to('guest/search.html');">
+                <li class="page-faq nav-item">
+                    <a class="nav-link" href="#search" onclick="$$.to('guest/search.html');">
                         Search
                     </a>
                 </li>
-                <li class="page-faq">
-                    <a href="#snapshots" onclick="$$.to('guest/snapshots.html');">
+                <li class="page-faq nav-item">
+                    <a class="nav-link" href="#snapshots" onclick="$$.to('guest/snapshots.html');">
                         Preview
                     </a>
                 </li>
-                <li class="page-faq">
-                    <a href="#faq" onclick="$$.to('guest/faq.html');">
+                <li class="page-faq nav-item">
+                    <a class="nav-link" href="#faq" onclick="$$.to('guest/faq.html');">
                         FAQ
                     </a>
                 </li>
-                <li class="page-faq">
-                    <a href="#developers" onclick="$$.to('guest/developers.html');">
+                <li class="page-faq nav-item">
+                    <a class="nav-link" href="#developers" onclick="$$.to('guest/developers.html');">
                         Developers
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#help" onclick="return false;" class="dropdown-toggle" data-toggle="dropdown">
+                    <a class="nav-link" href="#help" onclick="return false;" class="dropdown-toggle" data-toggle="dropdown">
                         Help
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="divider"></li>
                         <li>
-                            <a href="#contact" onclick="return $$.to('guest/contact.html');">
+                            <a class="nav-link" href="#contact" onclick="return $$.to('guest/contact.html');">
                                 Contact
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#credits" onclick="return $$.to('guest/credits.html');">
+                            <a class="nav-link" href="#credits" onclick="return $$.to('guest/credits.html');">
                                 Credits
                             </a>
                         </li>
                     </ul>
                 </li>
-
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-                <li class="page-login">
+			</ul>
+			<ul class="navbar-nav">
+                <li class="nav-item">
                     <script>
                         function loginWithLibreId() {
                             var url = "https://libreid-sinevia.rhcloud.com/?a=service_login&id=20150228084622561179";
@@ -75,12 +75,11 @@
                             return false;
                         }
                     </script>
-                    <a href="#" onclick="return loginWithLibreId();">
+                    <a class="nav-link" href="#" onclick="return loginWithLibreId();">
                         Login with LibreID
                     </a>
                 </li>
-            </ul>
-        </div>
-    </div>
-
-</div>
+			</ul>
+	  </div>
+	</div>
+</nav>
