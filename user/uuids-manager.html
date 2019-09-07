@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>UUID Manager - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() === null) {
+                $$.toRoute('guest/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">            
+            <div class="page-message-board">&nbsp;</div>
+
+            <h1>
+                Registered UUIDs
+
+                <button class="btn btn-default pull-right" onclick="$$.toRoute('user/uuids-manager');" style="margin-left: 10px;" title="Refresh">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+
+                <button class="btn btn-success pull-right" onclick="$$.toRoute('user/uuid-create')" title="Create New UUID">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    New UUID
+                </button>
+            </h1>
+
+            <table id="table_uuids" class="table table-responsive table-striped table-bordered">
+                <tr>
+                    <th style="text-align: center;">UUID</th>
+                    <th style="width:50px;text-align: center;">Status</th>
+                    <th style="width:1px;text-align: center;">Created</th>
+                    <th style="width:1px;text-align: center;">Updated</th>
+                    <th style="width:1px;text-align: center;">Options</th>
+                </tr>
+            </table>
+
+            <script>
+                var data = {cmd: 'uuids-list', user_id: $$.user().UniqueId, sid: $$.apiToken()};
+                $$.api().data(data).call().success(uuidsListResponse);
+                function uuidsListResponse(response) {
+                    try {
+                        if (response.status === 'success') {
+                            var uuids = response.data.uuids;
+                            for (var i = 0; i < uuids.length; i++) {
+                                var uuid = uuids[i];
+                                var timeCreated = uuid.Created;
+                                var timeCreatedHuman = timeCreated.substring(0, timeCreated.length - 3);
+                                var timeUpdated = uuid.Updated;
+                                var timeUpdatedHuman = timeUpdated.substring(0, timeUpdated.length - 3);
+
+                                var row = '';
+                                row += '<tr>';
+                                row += '<td style="text-align: left;">';
+                                row += ' <div style="font-family:monospace;color:lime;"><b>' + uuid.UniqueId + '</b></div>';
+                                row += ' <div>' + uuid.Description + '</div>';
+                                row += '</td>';
+                                row += '<td style="text-align:center">' + uuid.Status + '</td>';
+                                row += '<td style="text-align:center">' + timeCreatedHuman + '</td>';
+                                row += '<td style="text-align:center">' + timeUpdatedHuman + '</td>';
+                                row += '<td style="text-align: center;">';
+                                row += ' <div class="btn-group">';
+                                row += '  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>';
+                                row += '  <ul class="dropdown-menu" role="menu">';
+                                row += '   <li><a href="#" onclick="$$.toRoute(\'user/uuid-update\',{uuid:\'' + uuid.UniqueId + '\'});return false;">Edit</a></li>';
+                                row += '   <li class="divider"></li>';
+                                row += '   <li><a href="#" onclick="modalUuidDeleteShow(\'' + uuid.UniqueId + '\');">Delete</a></li>';
+                                row += '  </ul>';
+                                row += ' </div>';
+                                row += '</td>';
+                                row += '<tr>';
+
+                                $('#table_uuids tr:last').after(row);
+                            }
+                        } else {
+                            $('div.page-message-board').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        $('div.page-message-board').html('<div class="alert alert-danger">There was an error...</div>');
+                    }
+
+                }
+            </script>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: UUID Delete Modal Dialog -->
+        <div class="modal fade" id="modal_uuid_delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Confirm UUID Delete</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            Are you sure you want to delete this UUID?
+                        </div>
+                        <div>
+                            Note! This action cannot be undone and you will lose
+                            this UUID forever                    
+                        </div>
+
+                        <input type="hidden" id="uuid_delete_id" name="uuid" value="" />
+                    </div>
+                    <div class="modal-footer">
+                        <a id="modal-close" href="#" class="btn btn-info pull-left" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            Cancel
+                        </a>
+                        <a id="modal-close" href="#" class="btn btn-danger" data-dismiss="modal" onclick="uuidDelete();">
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                            Delete UUID
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function modalUuidDeleteShow(uuid) {
+                $('#uuid_delete_id').val(uuid);
+                $('#modal_uuid_delete').modal('show');
+            }
+            function uuidDelete() {
+                $('div.page-message-board').html('<div class="alert alert-info">Processing request...</div>');
+                var uuid = $('#uuid_delete_id').val();
+                var data = {
+                    cmd: 'uuid-delete',
+                    user_id: $$.user().UniqueId,
+                    sid: $$.apiToken(),
+                    uuid: uuid
+                };
+                $$.api().data(data).call().success(uuidDeleteResponse).error(function(){
+                    $('div.page-message-board').html('<div class="alert alert-danger">There was an error. Please, try again later!</div>');
+                });
+            }
+            function uuidDeleteResponse(response) {
+                try {
+                    if (response.status === 'success') {
+                        $('div.page-message-board').html('<div class="alert alert-success">UUID deleted successfully</div>');
+                        $$.toRoute('user/uuids-manager');
+                    } else {
+                        $('div.page-message-board').html('<div class="alert alert-danger">' + response.message + '</div>');
+                    }
+                } catch (err) {
+                    console.log(err);
+                    $('div.page-message-board').html('<div class="alert alert-danger">There was an error with your authentication</div>');
+                }
+            }
+
+        </script>
+        <!-- END: UUID Delete Modal Dialog -->
+        
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit UUID - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() === null) {
+                $$.toRoute('guest/home');
+            }
+            var uuidId = $$.urlParam('uuid');
+            if (uuidId === null) {
+                $$.toRoute('user/uuids-manager');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">
+            <div class="page-message-board">&nbsp;</div>
+
+            <h1>
+                UUID Update: <span class="uuid_uuid"></span>
+            </h1>
+
+            <div class="form_uuid_create">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" placeholder="Enter short description to easily recognize your UUID">{%=o.uuid.Description%}</textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info" onclick="$$.toRoute('user/uuids-manager');">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Cancel
+                    </button>
+
+                    <button class="btn btn-success pull-right" onclick="formUuidUpdateSubmit();">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                $('span.uuid_uuid').html(uuidId);
+                var msgBoard = $('div.page-message-board');
+                var data = {cmd: 'uuid-get', uuid: uuidId, user_id: $$.user().UniqueId, sid: $$.apiToken()};
+                $$.api().data(data).call().success(uuidGetResponse);
+                function uuidGetResponse(response) {
+                    try {
+                        if (response.status === 'success') {
+                            var uuid = response.data.uuid;                            
+                            $("div.form_uuid_create textarea[name='description']").val(uuid.UniqueId);
+                            $("div.form_uuid_create textarea[name='description']").val(uuid.Description);
+                        } else {
+                            msgBoard.html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        msgBoard.html('<div class="alert alert-danger">There was an error with your authentication</div>');
+                    }
+                }
+                
+                function formUuidUpdateSubmit() {
+                    var description = $.trim($("div.form_uuid_create textarea[name='description']").val());
+
+                    msgBoard.html('<div class="alert alert-info">Processing request...</div>');
+
+                    if (description === '') {
+                        msgBoard.html("<div class='alert alert-danger'>Description is required field</div>");
+                        return;
+                    }
+
+                    var data = {cmd:'uuid-update',user_id: $$.user().UniqueId, sid: $$.apiToken(), uuid: uuidId, description: description};
+
+                    $$.api().data(data).call().success(uuidUpdateResponse);
+
+                    function uuidUpdateResponse(response) {
+                        try {
+                            if (response.status === 'success') {
+                                msgBoard.html('<div class="alert alert-success">' + response.message + '</div>');
+                                $$.toRoute('user/uuids-manager', {"message": "Your UUID was successfully saved..."});
+                            } else {
+                                msgBoard.html("<div class='alert alert-danger'>" + response.message + "</div>");
+                            }
+                        }
+                        catch (err) {
+                            console.log(err);
+                            msgBoard.html("<div class='alert alert-danger'>There was an error with your authentication</div>");
+                        }
+                    }
+                }
+            </script>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+        
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

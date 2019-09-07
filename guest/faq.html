@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>FAQ - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() !== null) {
+                $$.toRoute('user/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">
+            <style scoped="scoped">
+                p{
+                    margin: 10px 0px;
+                    font-size: 16px;
+                }
+                p span.glyphicon{
+                    padding-right: 20px;
+                }
+            </style>
+            <h1>Frequently Asked Questions</h1>
+            
+            <h3>What is UUID?</h3>
+            <p>
+                The Universally Unique Identifier (UUID) is a 16-octet (128-bit) number,
+                which is "practically unique", but not "guaranteed unique".
+            </p>
+            
+            <h3>What does UUID Registry do?</h3>
+            <p>
+                <b>UUID Resgistry</b> allows you to generate and register an UUID. Thus
+                it will be guaranteed unique in the subset of registered UUIDs.
+            </p>
+            
+            <h3>Where Can I Find the Original Specification?</h3>
+            <p>
+                <a href="http://www.ietf.org/rfc/rfc4122.txt" target="_blank">http://www.ietf.org/rfc/rfc4122.txt</a>                
+            </p>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+        
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

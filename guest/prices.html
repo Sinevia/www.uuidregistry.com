@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Prices - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() !== null) {
+                $$.toRoute('user/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">
+            <style scoped="scoped">
+                p{
+                    margin: 10px 0px;
+                    font-size: 20px;
+                }
+                p span.glyphicon{
+                    padding-right: 20px;
+                }
+            </style>
+            <!--<h1>Extremely Fair and Affordable</h1>-->
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Prices
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1>
+                            &pound;0.01<span class="subscript">/day per registered UUID</span>
+                        </h1>
+                        <small>1 month FREE trial</small>
+                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr class="active">
+                                <td>
+                                    Easy UUIDs management
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Extremely affordable prices
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td>
+                                    Unlimited UUIDs per account
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    
+                    <script>
+                        function loginWithLibreId() {
+                            var url = "https://libreid-sinevia.rhcloud.com/?a=service_login&id=20150228084622561179";
+                            url += "&return=" + encodeURIComponent($$.config().rootUrl + 'guest/login.html');
+                            window.location.href = url;
+                            return false;
+                        }
+                    </script>
+                    <a role="button" class="btn btn-success" href="#" onclick="return loginWithLibreId();">
+                        Login with LibreID
+                    </a>
+                    1 month FREE trial</div>
+            </div>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

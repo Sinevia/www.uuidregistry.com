@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>New UUID - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() === null) {
+                $$.toRoute('guest/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">            
+            <div class="page-message-board">&nbsp;</div>
+
+            <h1>
+                New UUID
+            </h1>
+
+            <div class="form_uuid_create">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" placeholder="Enter short description to easily recognize your UUID"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>UUID Type</label>
+                    <select name="uuidType" class="form-control">
+                        <option value="1" onclick="$('.uuid_mac_address').show();
+                                $('.uuid_namespace,.uuid_namespace_type').hide();">ver. 1 - MAC address and date-time</option>
+                        <option value="3" onclick="$('.uuid_mac_address').hide();
+                                $('.uuid_namespace,.uuid_namespace_type').show();">ver. 3 - MD5 & namespace</option>
+                        <option value="4" selected="selected" onclick="$('.uuid_mac_address,.uuid_namespace,.uuid_namespace_type').hide();">ver. 4 - Random</option>
+                        <option value="5" onclick="$('.uuid_mac_address').hide();
+                                $('.uuid_namespace,.uuid_namespace_type').show();">ver. 5 - SHA1 & namespace</option>
+                    </select>
+                </div>
+                <div class="form-group uuid_mac_address" style="display:none;">
+                    <label>UUID MAC Address</label>
+                    <input name="uuidMacAddress"  class="form-control" placeholder="00:11:22:33:44:55" />
+                </div>
+                <div class="form-group uuid_namespace" style="display:none;">
+                    <label>UUID Name</label>
+                    <textarea name="uuidName"  class="form-control"></textarea>
+                </div>
+                <div class="form-group uuid_namespace" style="display:none;">
+                    <label>UUID Namespace</label>
+                    <div class="input-group">
+                        <input name="uuidNamespace"  class="form-control" placeholder="Your UUID for namespace" />
+                        <div class="input-group-btn">
+                            <script>
+                                function updateNamespace(str){
+                                    $("div.form_uuid_create input[name='uuidNamespace']").val(str);
+                                }
+                            </script>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Predefined<span class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                <li onclick="updateNamespace('6ba7b811-9dad-11d1-80b4-00c04fd430c8')" style="color:#999">URL Namespace</li>
+                                <li onclick="updateNamespace('6ba7b812-9dad-11d1-80b4-00c04fd430c8')" style="color:#999">OID Namespace</li>
+                                <li onclick="updateNamespace('6ba7b814-9dad-11d1-80b4-00c04fd430c8')" style="color:#999">X500 Namespace</li>
+                                <li onclick="updateNamespace('6ba7b810-9dad-11d1-80b4-00c04fd430c8')" style="color:#999">DNS Namespace</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--
+                    <select name="uuidNamespaceType" class="form-control">
+                        <option value="X500">Distinguished Name</option>
+                        <option value="DNS">Domain Name</option>
+                        <option value="Object">Object Identifier</option>
+                        <option value="URL">URL</option>                        
+                    </select>
+                    -->
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info" onclick="executeCommand('uuids-manager');">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Cancel
+                    </button>
+
+                    <button class="buttonCreate btn btn-success pull-right" onclick="formUuidCreateSubmit();">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Create
+                        <span class="fa fa-spinner fa-spin" style="display:none;"></span>
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                function formUuidCreateSubmit() {
+                    var msgBoard = $('div.page-message-board');
+
+                    var description = $.trim($("div.form_uuid_create textarea[name='description']").val());
+                    var type = $.trim($("div.form_uuid_create select[name='uuidType']").val());
+                    var macAddress = $.trim($("div.form_uuid_create input[name='uuidMacAddress']").val());
+                    var namespace = $.trim($("div.form_uuid_create input[name='uuidNamespace']").val());
+                    var name = $.trim($("div.form_uuid_create textarea[name='uuidName']").val());
+
+                    if (description === '') {
+                        msgBoard.html('<div class="alert alert-danger">Description is required field</div>');
+                        setTimeout(function () {
+                            msgBoard.html('');
+                        }, 5000);
+                        return;
+                    }
+
+                    var user = $$.user();
+
+                    var data = {
+                        cmd: 'uuid-create',
+                        user_id: user.UniqueId,
+                        sid: $$.apiToken(),
+                        description: description,
+                        uuid_type: type,
+                        uuid_macAddress: macAddress,
+                        uuid_namespace: namespace,
+                        uuid_name: name
+                    };
+                    
+                    $("div.form_uuid_create button.buttonCreate span.fa").show();
+
+                    $$.api().data(data).call().success(uuidCreateResponse).error(function(){
+                        $("div.form_uuid_create button.buttonCreate span.fa").hide();
+                    });
+
+                    function uuidCreateResponse(response) {
+                        $("div.form_uuid_create button.buttonCreate span.fa").hide();
+                        try {
+                            if (response.status === 'success') {
+                                msgBoard.html('<div class="alert alert-success">' + response.message + '</div>');
+                                $$.toRoute('user/uuids-manager', {"message": "Your UUID was successfully generated..."});
+                            } else {
+                                msgBoard.html('<div class="alert alert-danger">' + response.message + '</div>');
+                            }
+                        } catch (err) {
+                            console.log(err);
+                            msgBoard.html('<div class="alert alert-danger">There was an error. Please, try again</div>');
+                        }
+                    }
+                }
+            </script>     
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

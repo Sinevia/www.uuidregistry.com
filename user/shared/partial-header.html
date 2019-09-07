@@ -1,0 +1,55 @@
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" onclick="$$.toRoute('user/home')">UUID Registry</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="action-home">
+                    <a href="#" onclick="$$.toRoute('user/home');return false;">
+                        Home
+                    </a>
+                </li>
+                <li class="action-faq">
+                    <a href="#" onclick="$$.toRoute('user/uuids-manager');return false;">
+                        Manage UUIDs
+                    </a>
+                </li>                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="user_first_name"></span>
+                        <span class="user_last_name"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="action_profile">
+                            <a href="#" onclick="$$.toRoute('user/profile');return false;">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="action_logout">
+                            <a href="#" onclick="return $$.toRoute('user/logout');">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        var user = $$.user();
+        $("ul.nav span.user_first_name").html(user.FirstName);
+        $("ul.nav span.user_last_name").html(user.LastName);
+    });
+</script>

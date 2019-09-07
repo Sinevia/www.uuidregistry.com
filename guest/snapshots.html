@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Snapshots - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() !== null) {
+                $$.toRoute('user/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">
+            <style scoped="scoped">
+                p{
+                    margin: 10px 5px;
+                    font-size: 20px;
+                }
+                p span.glyphicon{
+                    padding-right: 20px;
+                }
+            </style>
+            <h1>Screenshots</h1>
+            <h4>1. Register New UUID</h4>
+            <p>
+                <img src="img/20141219-snap-uuid-create.png" class="img img-responsive"/>
+            </p>
+            <h4>2. Manage Registered UUID</h4>
+            <p>
+                <img src="img/20141219-snap-uuids-manager.png" class="img img-responsive"/>
+            </p>
+            <h4>3. Delete Registered UUID</h4>
+            <p>
+                <img src="img/20141219-snap-uuid-delete.png" class="img img-responsive"/>
+            </p>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+        
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>

@@ -1,6 +1,6 @@
 body{
     padding-top: 80px;
-    background-image: url('bg-shimmering-light-pattern.jpg');
+    background-image: url('/shared/bg-shimmering-light-pattern.jpg');
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -26,4 +26,8 @@ body {
 
 .footer .container{
     margin: 12px auto 12px auto;
+}
+
+.navbar{
+	background:#375A7F;
 }

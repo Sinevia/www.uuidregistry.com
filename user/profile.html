@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Profile - UUID Registry</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../shared/js/$$.js"></script>
+        <script src="../shared/js/$$.initialize.js"></script>
+        <script>
+            if ($$.user() === null) {
+                $$.toRoute('guest/home');
+            }
+        </script>
+    </head>
+    <body>
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+
+        <!-- START: Content -->
+        <div class="container">
+            <div class='page-message-board'>&nbsp;</div>
+
+            <h1>
+                Update Profile:
+                <span class="user_first_name">&nbsp;</span>
+                <span class="user_last_name">&nbsp;</span>
+            </h1>
+
+            <div class="form_profile_update">
+                <div class="form-group">
+                    <label>
+                        First Name <sup>*</sup>
+                    </label>
+                    <input name="first_name" class="form-control" placeholder="Your first name" value="" />
+                </div>
+                <div class="form-group">
+                    <label>
+                        Last Name <sup>*</sup>
+                    </label>
+                    <input name="last_name" class="form-control" placeholder="Your last name" value="" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info" onclick="app.executeAction('home');">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Cancel
+                    </button>
+
+                    <button class="btn btn-success pull-right" onclick="formProfileUpdateSubmit();">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                $(function () {
+                    var user = $$.user();
+                    $('div.page_profile span.user_first_name').html(user.FirstName);
+                    $('div.page_profile span.user_last_name').html(user.LastName);
+                    $('div.form_profile_update input[name="first_name"]').val(user.FirstName);
+                    $('div.form_profile_update input[name="last_name"]').val(user.LastName);
+                });
+
+                function formProfileUpdateSubmit() {
+                    var firstName = $.trim($("div.form_profile_update input[name='first_name']").val());
+                    var lastName = $.trim($("div.form_profile_update input[name='last_name']").val());
+//                    
+//
+//                    app.showUserNotification('<div class="alert alert-info">Processing request...</div>');
+//
+//                    if (firstName === '') {
+//                        app.showUserNotification("<div class='alert alert-danger'>First Name is required field</div>", {timeout: 10000});
+//                        return;
+//                    }
+//
+//                    if (lastName === '') {
+//                        app.showUserNotification("<div class='alert alert-danger'>Last Name is required field</div>", {timeout: 10000});
+//                        return;
+//                    }
+//
+//                    var data = {
+//                        user_id: app.getCurrentUser().getId(),
+//                        sid: registry.get('sid'),
+//                        first_name: firstName,
+//                        last_name: lastName
+//                    };
+//                    // api.cmd('uuid-update', data, uuidUpdateResponse);
+//
+                    var msg = $('<div class="alert alert-warning">Profile updates are disabled. Use LibreID to update your profile</div>');
+                    $('div.page-message-board').html(msg);                    
+                }
+            </script>
+        </div>
+        <!-- END: Content -->
+
+        <!-- START: Header -->
+        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
+        <!-- END: Header -->
+        
+        <!-- START: StatCounter -->
+        <script src="../shared/js/statcounter.js"></script>
+        <!-- END: StatCounter -->
+    </body>
+</html>
