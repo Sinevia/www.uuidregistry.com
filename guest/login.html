@@ -22,7 +22,7 @@ title: Login
         var libreId = $$.getUrlParam('libreid');
         var libreIdToken = $$.getUrlParam('libreida');
         var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
-        $$.api('login',data).done(loginRequestProcess).fail(loginRequestFailed);
+        $$.ws('login',data).done(loginRequestProcess).fail(loginRequestFailed);
     }, 2000);
         
     function loginRequestProcess(response) {
