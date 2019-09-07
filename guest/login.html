@@ -19,10 +19,10 @@ title: Login
 
     setTimeout(function(){
         /* START: Authenticate */
-        var libreId = $$.urlParam('libreid');
-        var libreIdToken = $$.urlParam('libreida');
+        var libreId = $$.getUrlParam('libreid');
+        var libreIdToken = $$.getUrlParam('libreida');
         var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
-        $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
+        $$.api('login',data).done(loginRequestProcess).fail(loginRequestFailed);
     }, 2000);
         
     function loginRequestProcess(response) {
