@@ -16,13 +16,14 @@ title: Login
 <!-- END: Content -->
 
 <script>
-    $(function(){
+
+    setTimeout(function(){
         /* START: Authenticate */
         var libreId = $$.urlParam('libreid');
         var libreIdToken = $$.urlParam('libreida');
         var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
         $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
-    });
+    }, 2000);
         
     function loginRequestProcess(response) {
         console.log(response);
