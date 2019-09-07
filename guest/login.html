@@ -3,15 +3,27 @@ layout: guest
 title: Login
 ---
 
+<!-- START: Content -->
+<div class="container">
+    <h1>Login</h1>
+    <div class="page-message-board">
+        <div class="alert alert-info">
+            <span class="fa fa-spinner fa-spin"></span>
+            Your authentication is being checked
+        </div>
+    </div>                
+</div>
+<!-- END: Content -->
+
 <script>
-    //app.executeAction('login');
-
-    /* START: Authenticate */
-    var libreId = $$.urlParam('libreid');
-    var libreIdToken = $$.urlParam('libreida');
-    var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
-    $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
-
+    $(function(){
+        /* START: Authenticate */
+        var libreId = $$.urlParam('libreid');
+        var libreIdToken = $$.urlParam('libreida');
+        var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
+        $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
+    });
+        
     function loginRequestProcess(response) {
         console.log(response);
 
@@ -37,15 +49,4 @@ title: Login
         $('.page-message-board').html(msg);
     }
 </script>
-
-<!-- START: Content -->
-<div class="container">
-    <h1>Login</h1>
-    <div class="page-message-board">
-        <div class="alert alert-info">
-            <span class="fa fa-spinner fa-spin"></span>
-            Your authentication is being checked
-        </div>
-    </div>                
-</div>
-<!-- END: Content -->
+    
