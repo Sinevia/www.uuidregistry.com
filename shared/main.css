@@ -1,5 +1,5 @@
 body{
-    padding-top: 80px;
+    /* padding-top: 80px; */
     background-image: url('/shared/bg-shimmering-light-pattern.jpg');
 }
 /* Sticky footer styles
@@ -29,5 +29,8 @@ body {
 }
 
 .navbar{
-	background:#375A7F;
+	background:#375A7F !important;
+}
+.navbar a.nav-link{
+  color:white;
 }
