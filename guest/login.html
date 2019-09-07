@@ -1,69 +1,51 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Login - UUID Registry</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="../shared/js/$$.js"></script>
-        <script src="../shared/js/$$.initialize.js"></script>
-        <script>
-            //app.executeAction('login');
+---
+layout: guest
+title: Login
+---
 
-            /* START: Authenticate */
-            var libreId = $$.urlParam('libreid');
-            var libreIdToken = $$.urlParam('libreida');
-            var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
-            $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
+<script>
+    //app.executeAction('login');
 
-            function loginRequestProcess(response) {
-                console.log(response);
+    /* START: Authenticate */
+    var libreId = $$.urlParam('libreid');
+    var libreIdToken = $$.urlParam('libreida');
+    var data = {"cmd": "login", libre_id: libreId, libre_token: libreIdToken};
+    $$.api().data(data).call().success(loginRequestProcess).fail(loginRequestFailed);
 
-                try {
-                    if (response.status === 'success') {
-                        var user = response.data.user;
-                        var session = response.data.session;
-                        $$.user(user);
-                        $$.apiToken(session);
-                        $$.toRoute('user/home');
-                    } else {
-                        var msg = $('<div class="alert alert-danger">').html(response.message);
-                        $('.page-message-board').html(msg);
-                    }
-                } catch (err) {
-                    console.log(err);
-                    var msg = $('<div class="alert alert-danger">').html('There was an error with your authentication');
-                    $('.page-message-board').html(msg);
-                }
-            }
-            function loginRequestFailed() {
-                var msg = $('<div class="alert alert-danger">').html('Login was unsuccessful');
+    function loginRequestProcess(response) {
+        console.log(response);
+
+        try {
+            if (response.status === 'success') {
+                var user = response.data.user;
+                var session = response.data.session;
+                $$.user(user);
+                $$.apiToken(session);
+                $$.toRoute('user/home');
+            } else {
+                var msg = $('<div class="alert alert-danger">').html(response.message);
                 $('.page-message-board').html(msg);
             }
-        </script>
-    </head>
-    <body>
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
+        } catch (err) {
+            console.log(err);
+            var msg = $('<div class="alert alert-danger">').html('There was an error with your authentication');
+            $('.page-message-board').html(msg);
+        }
+    }
+    function loginRequestFailed() {
+        var msg = $('<div class="alert alert-danger">').html('Login was unsuccessful');
+        $('.page-message-board').html(msg);
+    }
+</script>
 
-        <!-- START: Content -->
-        <div class="container">
-            <h1>Login</h1>
-            <div class="page-message-board">
-                <div class="alert alert-info">
-                    <span class="fa fa-spinner fa-spin"></span>
-                    Your authentication is being checked
-                </div>
-            </div>                
+<!-- START: Content -->
+<div class="container">
+    <h1>Login</h1>
+    <div class="page-message-board">
+        <div class="alert alert-info">
+            <span class="fa fa-spinner fa-spin"></span>
+            Your authentication is being checked
         </div>
-        <!-- END: Content -->
-
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
-        
-        <!-- START: StatCounter -->
-        <script src="../shared/js/statcounter.js"></script>
-        <!-- END: StatCounter -->
-    </body>
-</html>
+    </div>                
+</div>
+<!-- END: Content -->

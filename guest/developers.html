@@ -1,127 +1,103 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Developers - UUID Registry</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="../shared/js/$$.js"></script>
-        <script src="../shared/js/$$.initialize.js"></script>
-        <script>
-            if ($$.user() !== null) {
-                $$.toRoute('user/home');
-            }
-        </script>
-    </head>
-    <body>
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
+---
+layout: guest
+title: Developers
+---
 
-        <!-- START: Content -->
-        <div class="container">
-            <style scoped="scoped">
-                p{
-                    margin: 10px 0px;
-                    font-size: 16px;
-                }
-                p span.glyphicon{
-                    padding-right: 20px;
-                }
-            </style>
+<!-- START: Content -->
+<div class="container">
+    <style scoped="scoped">
+        p{
+            margin: 10px 0px;
+            font-size: 16px;
+        }
+        p span.glyphicon{
+            padding-right: 20px;
+        }
+    </style>
 
-            <h1>Web Services</h1>
-            <p>
-                UuidRegistry.Com offers a simple web service, that allows
-                to create and register as many Universally
-                Unique Identifier (UUID) string(s) as needed.
-            </p>
+    <h1>Web Services</h1>
+    <p>
+        UuidRegistry.Com offers a simple web service, that allows
+        to create and register as many Universally
+        Unique Identifier (UUID) string(s) as needed.
+    </p>
 
-            <h3>Register an UUID</h3>
+    <h3>Register an UUID</h3>
 
-            <pre>
-                http://uuidregistry.com/api/?key=YOUR_KEY&description=UUID_DESCRIPTION
-            </pre>
+    <pre>
+        http://uuidregistry.com/api/?key=YOUR_KEY&description=UUID_DESCRIPTION
+    </pre>
 
-            <h1>Tools</h1>
+    <h1>Tools</h1>
 
-            <hr />
-            <h3>
-                Human-friendly UUID
-                <a href="http://uuidregistry.com/tools/index.php?cmd=human-uuid" target="_blank" class="btn btn-success pull-right">
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                    View in Action
-                </a>
-            </h3>
-            <p>
-                A common complain with standard UUIDs are that they are unreadable.
-                This no longer has to be the case. This small web service will
-                generate a human-friendly UUID, which is easily readable 
-                and perfectly valid. It will generate a UUID looking like:
-                20141219-1003-1033-473572-808278214600. Benefits of using:
-                easily readable; by looking at it provides date and time
-                information when was generated; can be ordered by date of creation;
-                UUID valid.
-                You may also choose to store the value in the database using
-                the provided bases -- Base10, Base16, Base32, Base36, Base62,
-                Base64, Base75 -- thus saving extra space.
-                Available in JSON and JSONP.
-            </p>
-            <pre>
-                http://uuidregistry.com/tools/index.php?cmd=human-uuid
-            </pre>
-            
-            <hr />
+    <hr />
+    <h3>
+        Human-friendly UUID
+        <a href="http://uuidregistry.com/tools/index.php?cmd=human-uuid" target="_blank" class="btn btn-success pull-right">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            View in Action
+        </a>
+    </h3>
+    <p>
+        A common complain with standard UUIDs are that they are unreadable.
+        This no longer has to be the case. This small web service will
+        generate a human-friendly UUID, which is easily readable 
+        and perfectly valid. It will generate a UUID looking like:
+        20141219-1003-1033-473572-808278214600. Benefits of using:
+        easily readable; by looking at it provides date and time
+        information when was generated; can be ordered by date of creation;
+        UUID valid.
+        You may also choose to store the value in the database using
+        the provided bases -- Base10, Base16, Base32, Base36, Base62,
+        Base64, Base75 -- thus saving extra space.
+        Available in JSON and JSONP.
+    </p>
+    <pre>
+        http://uuidregistry.com/tools/index.php?cmd=human-uuid
+    </pre>
+    
+    <hr />
 
-            <h3>
-                Human-friendly Unique ID
-                <a href="http://uuidregistry.com/tools/index.php?cmd=human-uid" target="_blank" class="btn btn-success pull-right">
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                    View in Action
-                </a>
-            </h3>
-            <p>
-                A human-friendly UUID is too long. Here is a unique ID generator,
-                which is not so long, yet it provides unique string. The unique
-                ID will look like: 20141219-100951-489936. Benefits of using:
-                easily readable; by looking at it provides date and time
-                information when was generated, can be ordered by date of creation.
-                You may also choose to store the value in the database using
-                the provided bases -- Base10, Base16, Base32, Base36, Base62,
-                Base64, Base75 -- thus saving extra space.
-                Available in JSON and JSONP.
-            </p>
-            <pre>
-                http://uuidregistry.com/tools/index.php?cmd=human-uid
-            </pre>
-            
-            <hr />
+    <h3>
+        Human-friendly Unique ID
+        <a href="http://uuidregistry.com/tools/index.php?cmd=human-uid" target="_blank" class="btn btn-success pull-right">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            View in Action
+        </a>
+    </h3>
+    <p>
+        A human-friendly UUID is too long. Here is a unique ID generator,
+        which is not so long, yet it provides unique string. The unique
+        ID will look like: 20141219-100951-489936. Benefits of using:
+        easily readable; by looking at it provides date and time
+        information when was generated, can be ordered by date of creation.
+        You may also choose to store the value in the database using
+        the provided bases -- Base10, Base16, Base32, Base36, Base62,
+        Base64, Base75 -- thus saving extra space.
+        Available in JSON and JSONP.
+    </p>
+    <pre>
+        http://uuidregistry.com/tools/index.php?cmd=human-uid
+    </pre>
+    
+    <hr />
 
-            <h3>
-                Timestamp-based Unique ID
-                <a href="http://uuidregistry.com/tools/index.php?cmd=timestamp-uid" target="_blank" class="btn btn-success pull-right">
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                    View in Action
-                </a>
-            </h3>
-            <p>
-                All previous versions are too long? Use the UNIX timestamp based
-                unique ID generator.
-                The unique ID will look like: 1418983968.
-                Benefits of using: easily readable; can be ordered by date of creation.
-                Available in JSON and JSONP.
-            </p>
-            <pre>
-                http://uuidregistry.com/tools/index.php?cmd=timestamp-uid
-            </pre>
-        </div>
-        <!-- END: Content -->
-
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
-
-        <!-- START: StatCounter -->
-        <script src="../shared/js/statcounter.js"></script>
-        <!-- END: StatCounter -->
-    </body>
-</html>
+    <h3>
+        Timestamp-based Unique ID
+        <a href="http://uuidregistry.com/tools/index.php?cmd=timestamp-uid" target="_blank" class="btn btn-success pull-right">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            View in Action
+        </a>
+    </h3>
+    <p>
+        All previous versions are too long? Use the UNIX timestamp based
+        unique ID generator.
+        The unique ID will look like: 1418983968.
+        Benefits of using: easily readable; can be ordered by date of creation.
+        Available in JSON and JSONP.
+    </p>
+    <pre>
+        http://uuidregistry.com/tools/index.php?cmd=timestamp-uid
+    </pre>
+</div>
+<!-- END: Content -->
