@@ -1,89 +1,66 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Search - UUID Registry</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="../shared/js/$$.js"></script>
-        <script src="../shared/js/$$.initialize.js"></script>
-        <script>
-            //if ($$.user() !== null) {
-            //    $$.toRoute('user/home');
-            //}
-        </script>
-        <script>
-            function formUuidSearchProcess() {
-                var msgBoard = $('div.form-results-board');
-                var uuid = $.trim($("div#form_uuid_search input[name='uuid']").val());
-                if (uuid === '') {
-                    msgBoard.html('<div class="alert alert-danger">UUID is required field</div>');
-                    setTimeout(function () {
-                        msgBoard.html('');
-                    }, 5000);
-                    return;
+---
+layout: guest
+title: Search
+---
+
+<script>
+    function formUuidSearchProcess() {
+        var msgBoard = $('div.form-results-board');
+        var uuid = $.trim($("div#form_uuid_search input[name='uuid']").val());
+        if (uuid === '') {
+            msgBoard.html('<div class="alert alert-danger">UUID is required field</div>');
+            setTimeout(function () {
+                msgBoard.html('');
+            }, 5000);
+            return;
+        }
+
+        var data = {
+            cmd: 'uuid-search',
+            uuid: uuid,
+        };
+
+        $$.api().data(data).call().success(uuidSearchResponse);
+
+        function uuidSearchResponse(response) {
+            try {
+                if (response.status === 'success') {
+                    var uuid = response.data.uuid;
+                    var html = '<table>';
+                    html += '<tr><td>UUID</td><td>'+uuid.UniqueId+'</td></tr>';
+                    html += '<tr><td>Owner</td><td>'+uuid.OwnerNames+'</td></tr>';
+                    html += '<tr><td>Created</td><td>'+uuid.TimeCreated+'</td></tr>';
+                    html += '</table>';
+                    msgBoard.html('<div class="alert alert-success">' + html + '</div>');
+                } else {
+                    msgBoard.html('<div class="alert alert-danger">' + response.message + '</div>');
                 }
-
-                var data = {
-                    cmd: 'uuid-search',
-                    uuid: uuid,
-                };
-
-                $$.api().data(data).call().success(uuidSearchResponse);
-
-                function uuidSearchResponse(response) {
-                    try {
-                        if (response.status === 'success') {
-                            var uuid = response.data.uuid;
-                            var html = '<table>';
-                            html += '<tr><td>UUID</td><td>'+uuid.UniqueId+'</td></tr>';
-                            html += '<tr><td>Owner</td><td>'+uuid.OwnerNames+'</td></tr>';
-                            html += '<tr><td>Created</td><td>'+uuid.TimeCreated+'</td></tr>';
-                            html += '</table>';
-                            msgBoard.html('<div class="alert alert-success">' + html + '</div>');
-                        } else {
-                            msgBoard.html('<div class="alert alert-danger">' + response.message + '</div>');
-                        }
-                    } catch (err) {
-                        console.log(err);
-                        msgBoard.html('<div class="alert alert-danger">There was an error. Please, try again</div>');
-                    }
-                }
-
+            } catch (err) {
+                console.log(err);
+                msgBoard.html('<div class="alert alert-danger">There was an error. Please, try again</div>');
             }
-        </script>
-    </head>
-    <body>
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-header.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
+        }
 
-        <!-- START: Content -->
-        <div class="container">
-            <div class="page-message-board">&nbsp;</div>
+    }
+</script>
 
-            <h1>Search Registered UUIDs</h1>
+<!-- START: Content -->
+<div class="container">
+    <div class="page-message-board">&nbsp;</div>
 
-            <div id="form_uuid_search" class="well" style="display: table;width: 100%;">
-                <input type="text" name="uuid" class="form-control col-sm-12" placeholder="Enter UUID to look for" />
-                <br /><br />
-                <button class="btn btn-primary pull-right col-sm-12" onclick="formUuidSearchProcess();">
-                    <span class="fa fa-search"></span>
-                    Search
-                </button>
-            </div>
-            
-            <div class="form-results-board">&nbsp;</div>
+    <h1>Search Registered UUIDs</h1>
+
+    <div id="form_uuid_search" class="well" style="display: table;width: 100%;">
+        <input type="text" name="uuid" class="form-control col-sm-12" placeholder="Enter UUID to look for" />
+        <br /><br />
+        <button class="btn btn-primary pull-right col-sm-12" onclick="formUuidSearchProcess();">
+            <span class="fa fa-search"></span>
+            Search
+        </button>
+    </div>
+    
+    <div class="form-results-board">&nbsp;</div>
 
 
-        </div>
-        <!-- END: Content -->
-
-        <!-- START: Header -->
-        <div data-widget-url="shared/partial-footer.html" data-widget-mode="replace"></div>
-        <!-- END: Header -->
-
-        <!-- START: StatCounter -->
-        <script src="../shared/js/statcounter.js"></script>
-        <!-- END: StatCounter -->
-    </body>
-</html>
+</div>
+<!-- END: Content -->
