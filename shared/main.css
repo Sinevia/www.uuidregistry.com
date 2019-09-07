@@ -34,3 +34,6 @@ body {
 .navbar a.nav-link{
   color:white;
 }
+.navbar .navbar-brand a{
+  color:white;
+}
